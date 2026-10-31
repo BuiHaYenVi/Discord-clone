@@ -1,0 +1,1022 @@
+/* ==========================================================================
+   Uri — Zoho Cliq Slate & Royal Blue Secondary Surfaces & Layout System
+   ========================================================================== */
+
+:root,
+[data-theme='light'],
+[data-theme='dark'] {
+  /* Custom Property Bridges to tokens.css */
+  --primary: var(--accent-primary);
+  --primary-hover: var(--accent-hover);
+  --primary-active: var(--accent-active);
+  --primary-soft: var(--accent-soft);
+  --primary-tint: var(--accent-tint);
+  --on-primary: var(--text-inverse);
+
+  --secondary: var(--accent-secondary);
+  --secondary-soft: rgba(2, 132, 199, 0.12);
+
+  --surface: var(--bg-1);
+  --surface-subtle: var(--bg-2);
+  --surface-muted: var(--bg-3);
+  --surface-elevated: var(--bg-elevated);
+  --surface-hover: var(--bg-hover);
+  --surface-glass: var(--glass-bg);
+  --surface-overlay: rgba(15, 23, 42, 0.48);
+
+  --on-surface: var(--text-primary);
+  --on-surface-secondary: var(--text-secondary);
+  --on-surface-muted: var(--text-muted);
+
+  --border: var(--border-subtle);
+
+  --telemetry-tcp: var(--transport-tcp);
+  --telemetry-udp: var(--transport-udp);
+  --telemetry-ws: var(--transport-ws);
+
+  --presence-online: var(--status-online);
+  --presence-idle: var(--status-idle);
+  --presence-dnd: var(--status-dnd);
+  --presence-offline: var(--status-offline);
+
+  --success: #22c55e;
+  --success-soft: rgba(34, 197, 94, 0.14);
+  --warning: #f59e0b;
+  --warning-soft: rgba(245, 158, 11, 0.14);
+  --error: #ef4444;
+  --error-soft: rgba(239, 68, 68, 0.12);
+
+  --radius-full: var(--radius-pill);
+  --shadow-modal: var(--shadow-lg);
+  --ease-out: var(--ease-snappy);
+}
+
+[data-theme='dark'] {
+  --surface-overlay: rgba(2, 6, 23, 0.68);
+  --secondary-soft: rgba(56, 189, 248, 0.16);
+}
+
+/* ==========================================================================
+   Floating Multi-Card Workspace Layout (Preserved Spatial Geometry)
+   ========================================================================== */
+
+.workspace-viewport {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 20px;
+  background-color: var(--bg-0);
+  overflow: hidden;
+}
+
+.workspace-layout-container {
+  width: 100%;
+  max-width: var(--floating-max-width, 1560px);
+  height: calc(100vh - 32px);
+  display: flex;
+  align-items: stretch;
+  gap: var(--floating-gap, 16px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Left Slim Floating Dock (~60px) */
+.dock-rail-shell {
+  width: var(--rail-width, 60px);
+  height: 100%;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  position: relative;
+  z-index: 20;
+}
+
+/* Circular Glassmorphic Dock Badge (44x44 rounded-full) */
+.dock-glass-badge {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(241, 245, 249, 0.72));
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow:
+    0 6px 16px -4px rgba(15, 23, 42, 0.08),
+    0 2px 6px -1px rgba(15, 23, 42, 0.04),
+    inset 0 1px 1px rgba(255, 255, 255, 0.96);
+  color: #475569;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.dock-glass-badge:hover {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.86));
+  border-color: rgba(147, 197, 253, 0.85);
+  color: #0f172a;
+  box-shadow:
+    0 10px 22px -4px rgba(37, 99, 235, 0.14),
+    0 3px 8px -2px rgba(15, 23, 42, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+[data-theme='dark'] .dock-glass-badge {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.82), rgba(15, 23, 42, 0.72));
+  border: 1px solid rgba(51, 65, 85, 0.88);
+  box-shadow:
+    0 8px 20px -4px rgba(2, 6, 23, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.09);
+  color: #94a3b8;
+}
+
+[data-theme='dark'] .dock-glass-badge:hover {
+  background: linear-gradient(145deg, rgba(51, 65, 85, 0.88), rgba(30, 41, 59, 0.8));
+  border-color: rgba(59, 130, 246, 0.55);
+  color: #f8fafc;
+  box-shadow:
+    0 10px 24px -4px rgba(37, 99, 235, 0.28),
+    inset 0 1px 1px rgba(255, 255, 255, 0.14);
+}
+
+.dock-glass-badge-danger {
+  background: linear-gradient(145deg, rgba(255, 228, 230, 0.92), rgba(254, 205, 211, 0.78));
+  border-color: rgba(251, 113, 133, 0.55);
+  color: #f43f5e;
+  box-shadow:
+    0 6px 16px -4px rgba(244, 63, 94, 0.18),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+[data-theme='dark'] .dock-glass-badge-danger {
+  background: linear-gradient(145deg, rgba(136, 19, 55, 0.55), rgba(76, 5, 25, 0.55));
+  border-color: rgba(244, 63, 94, 0.45);
+  color: #fb7185;
+}
+
+/* Top Independent Floating Search Pill (48px) */
+.floating-search-pill {
+  width: 100%;
+  height: var(--search-pill-height, 48px);
+  background-color: var(--bg-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  cursor: pointer;
+  transition: transform 0.18s var(--ease-snappy), border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+  flex-shrink: 0;
+}
+
+.floating-search-pill:hover {
+  border-color: var(--accent-tint);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+[data-theme='dark'] .floating-search-pill {
+  background-color: var(--bg-1);
+  border-color: var(--border-subtle);
+}
+
+[data-theme='dark'] .floating-search-pill:hover {
+  border-color: var(--accent-tint);
+}
+
+/* Card 1: Channel & DM Sidebar Card (24px Cliq Radius) */
+.card-sidebar-shell {
+  width: 100%;
+  height: 100%;
+  flex: 1 1 0%;
+  min-height: 0;
+  background-color: var(--bg-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card, 24px);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.22s var(--ease-snappy), box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Card 2: Main Chat / Friends / Voice Stage Card (24px Cliq Radius) */
+.card-chat-shell {
+  flex: 1 1 0%;
+  min-width: 0;
+  height: 100%;
+  background-color: var(--bg-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card, 24px);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Slide-over Member Drawer (280px over Card 2) */
+.member-slide-drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--member-sidebar-width, 280px);
+  z-index: 30;
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-left: 1px solid var(--border-subtle);
+  box-shadow: -10px 0 30px -5px rgba(15, 23, 42, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideInRight 0.22s var(--ease-snappy);
+}
+
+[data-theme='dark'] .member-slide-drawer {
+  box-shadow: -10px 0 30px -5px rgba(0, 0, 0, 0.55);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.mobile-topbar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding: 0 14px;
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .workspace-viewport {
+    padding: 8px 12px;
+  }
+
+  .workspace-layout-container {
+    gap: 10px;
+    height: calc(100vh - 16px);
+  }
+
+  .mobile-topbar {
+    display: flex;
+  }
+
+  .card-sidebar-shell {
+    position: fixed;
+    top: 8px;
+    bottom: 8px;
+    left: 72px;
+    width: 320px;
+    max-width: calc(100vw - 84px);
+    z-index: 60;
+    transform: translateX(-120%);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .drawer-open .card-sidebar-shell,
+  .card-sidebar-shell.drawer-open {
+    transform: translateX(0);
+  }
+}
+
+/* ==========================================================================
+   Typography Token Classes (Cliq Quicksand + JetBrains Mono)
+   ========================================================================== */
+
+.text-headline-display {
+  font-family: var(--font-sans);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--on-surface);
+}
+
+.text-headline-lg {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--on-surface);
+}
+
+.text-headline-md {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--on-surface);
+}
+
+.text-headline-sm {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  color: var(--on-surface);
+}
+
+.text-body-lg {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.text-body-md {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.text-body-sm {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.text-label-lg {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--on-surface);
+}
+
+.text-label-md {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+}
+
+.text-label-sm {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.text-mono-lg {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.text-mono-md {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.text-mono-sm {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+/* ==========================================================================
+   Reusable Cliq Button & Form Primitives
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 12px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 140ms var(--ease-snappy), background-color 140ms ease, border-color 140ms ease, color 140ms ease, box-shadow 140ms ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.99);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn-sm {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 10px;
+  font-size: 12.5px;
+}
+
+.btn-icon {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-surface-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease, transform 140ms ease;
+}
+
+.btn-icon:hover:not(:disabled) {
+  background-color: var(--surface-hover);
+  color: var(--on-surface);
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.24);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.32);
+}
+
+.btn-secondary {
+  background-color: var(--surface-subtle);
+  color: var(--on-surface);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--surface-hover);
+  border-color: var(--border-strong);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--on-surface-secondary);
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background-color: var(--surface-hover);
+  color: var(--on-surface);
+}
+
+.btn-danger {
+  background-color: var(--error);
+  color: #ffffff;
+  border-color: var(--error);
+}
+
+.btn-danger:hover:not(:disabled) {
+  filter: brightness(0.93);
+}
+
+/* Form Controls */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--on-surface-secondary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.field-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  background-color: var(--surface-subtle);
+  color: var(--on-surface);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  transition: border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+}
+
+.field-input::placeholder {
+  color: var(--on-surface-muted);
+  font-weight: 500;
+}
+
+.field-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  background-color: var(--surface);
+  box-shadow: 0 0 0 3px var(--primary-tint);
+}
+
+.field-helper {
+  font-size: 12px;
+  color: var(--on-surface-muted);
+}
+
+.field-error {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--error);
+}
+
+/* ==========================================================================
+   Badges, Protocol Pills & Presence Dots
+   ========================================================================== */
+
+.protocol-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.protocol-pill-tcp {
+  background-color: var(--primary-soft);
+  color: var(--telemetry-tcp);
+  border: 1px solid var(--primary-tint);
+}
+
+.protocol-pill-udp {
+  background-color: rgba(13, 148, 136, 0.12);
+  color: var(--telemetry-udp);
+  border: 1px solid rgba(13, 148, 136, 0.3);
+}
+
+.protocol-pill-ws {
+  background-color: var(--primary-soft);
+  color: var(--telemetry-ws);
+  border: 1px solid var(--primary-tint);
+}
+
+.protocol-pill-http {
+  background-color: var(--warning-soft);
+  color: var(--warning);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.protocol-pill-fallback {
+  background-color: var(--error-soft);
+  color: var(--error);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.presence-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.presence-ONLINE {
+  background-color: var(--presence-online);
+}
+
+.presence-IDLE {
+  background-color: var(--presence-idle);
+}
+
+.presence-DND {
+  background-color: var(--presence-dnd);
+}
+
+.presence-OFFLINE {
+  background-color: var(--presence-offline);
+}
+
+/* ==========================================================================
+   Modal & Backdrop System (SettingsModal, CommandPalette, Dialogs)
+   ========================================================================== */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: var(--surface-overlay);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: cliqFadeIn 150ms var(--ease-snappy);
+}
+
+.modal-dialog {
+  width: 100%;
+  background-color: var(--surface);
+  color: var(--on-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card, 24px);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: cliqSlideUpScale 180ms var(--ease-snappy);
+}
+
+@keyframes cliqFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cliqSlideUpScale {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================================================
+   Auth Screen Layout & Styling (Cliq 24px Card & Slate Canvas)
+   ========================================================================== */
+
+.auth-viewport {
+  width: 100vw;
+  height: 100dvh;
+  overflow-y: auto;
+  background-color: var(--bg-0);
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(37, 99, 235, 0.08) 0%, transparent 42%),
+    radial-gradient(circle at 88% 82%, rgba(2, 132, 199, 0.06) 0%, transparent 45%);
+  display: flex;
+  flex-direction: column;
+}
+
+[data-theme='dark'] .auth-viewport {
+  background-color: var(--bg-0);
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(37, 99, 235, 0.15) 0%, transparent 44%),
+    radial-gradient(circle at 88% 82%, rgba(14, 165, 233, 0.1) 0%, transparent 46%);
+}
+
+.auth-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  flex-shrink: 0;
+}
+
+.auth-shell {
+  flex: 1;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: 36px;
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .auth-topbar {
+    padding: 14px 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .auth-shell {
+    grid-template-columns: 1fr;
+    padding: 20px 16px;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .auth-card {
+    order: -1;
+  }
+
+  .auth-hero-panel > div:last-child {
+    display: none;
+  }
+}
+
+.auth-hero-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.auth-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card, 24px);
+  box-shadow: var(--shadow-card);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 520px) {
+  .persona-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.persona-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background-color: var(--surface-subtle);
+  color: var(--on-surface);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  text-align: left;
+  transition: transform 140ms var(--ease-snappy), border-color 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
+}
+
+.persona-btn:hover {
+  border-color: var(--primary);
+  background-color: var(--primary-soft);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.persona-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Settings Modal Layout (Cliq 24px Dialog)
+   ========================================================================== */
+
+.settings-dialog {
+  max-width: 820px;
+  height: min(640px, 88dvh);
+  display: grid;
+  grid-template-columns: 225px 1fr;
+}
+
+@media (max-width: 720px) {
+  .settings-dialog {
+    grid-template-columns: 1fr;
+    height: 92dvh;
+  }
+}
+
+.settings-nav {
+  background-color: var(--surface-subtle);
+  border-right: 1px solid var(--border);
+  padding: 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.settings-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--on-surface-secondary);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+.settings-nav-item:hover {
+  background-color: var(--surface-hover);
+  color: var(--on-surface);
+}
+
+.settings-nav-item.active {
+  background-color: var(--primary-soft);
+  border-color: var(--primary-tint);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.settings-content {
+  padding: 24px 28px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--surface);
+}
+
+/* ==========================================================================
+   Command Palette (Ctrl+K / Cmd+K — Cliq Quick Switcher)
+   ========================================================================== */
+
+.cmd-palette-dialog {
+  max-width: 580px;
+  max-height: min(520px, 82dvh);
+  display: flex;
+  flex-direction: column;
+}
+
+.cmd-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--surface-subtle);
+}
+
+.cmd-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--on-surface);
+}
+
+.cmd-search-input::placeholder {
+  color: var(--on-surface-muted);
+  font-weight: 500;
+}
+
+.cmd-search-input:focus {
+  outline: none;
+}
+
+.cmd-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cmd-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--on-surface);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 100ms ease, color 100ms ease, border-color 100ms ease;
+}
+
+.cmd-item:hover,
+.cmd-item.selected {
+  background-color: var(--primary-soft);
+  border-color: var(--primary-tint);
+  color: var(--primary);
+}
+
+.kbd-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 7px;
+  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  background-color: var(--surface-muted);
+  color: var(--on-surface-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Toast Notifications Stack
+   ========================================================================== */
+
+.toast-stack {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 360px;
+  pointer-events: none;
+}
+
+.toast-card {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-sans);
+  font-size: 13px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

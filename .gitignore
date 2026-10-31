@@ -1,0 +1,77 @@
+# ==========================================
+# GITIGNORE CHUẨN ĐỒ ÁN LẬP TRÌNH MẠNG
+# Dự án: Discord Mini (Java TCP Socket & Swing)
+# ==========================================
+
+# 1. NetBeans & IDE Build
+build/
+**/build/
+bin/
+**/bin/
+dist/
+**/dist/
+nbproject/private/
+**/nbproject/private/
+nbbuild/
+nbdist/
+
+# 2. Java Compiled & Binary Artifacts (Quy chế: cấm commit file nhị phân lớn)
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.7z
+
+# 3. IDE & Editor Configs (Quy chế: cấm commit .idea, .vscode)
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.code-workspace
+.settings/
+.project
+.classpath
+
+# 4. Node / Frontend dependencies & caches
+node_modules/
+**/node_modules/
+frontend/dist/
+frontend/.oxlint_cache/
+.playwright-mcp/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 5. Environment & Secret Configuration Files (Cấm commit thông tin nhạy cảm)
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+db.properties
+**/db.properties
+Chatserver/db.properties
+Chatserver/src/config/db.properties
+Chatserver/src/com/discordmini/server/config/db.properties
+!db.properties.example
+!**/db.properties.example
+
+# 6. OS & Temporary Files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+
+AGENT_FLOW.md
+# agents
+.agent/
+.agent
+/.vs

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ChatClient" default="default" basedir=".">
+    <description>Builds, tests, and runs the project ChatClient.</description>
+    <import file="nbproject/build-impl.xml"/>
+
+    <macrodef name="run-client-test">
+        <attribute name="classname"/>
+        <sequential>
+            <java classname="@{classname}" fork="true" failonerror="true" timeout="60000">
+                <classpath>
+                    <path path="${run.test.classpath}"/>
+                </classpath>
+            </java>
+        </sequential>
+    </macrodef>
+
+    <target name="test" depends="compile,compile-test" description="Run standalone ChatClient tests">
+        <run-client-test classname="com.discordmini.client.bridge.JsonHelperTest"/>
+        <run-client-test classname="com.discordmini.client.bridge.UiBridgeServerTest"/>
+        <run-client-test classname="com.discordmini.client.service.AuthServiceTest"/>
+        <run-client-test classname="com.discordmini.client.service.ChatServiceTest"/>
+        <run-client-test classname="com.discordmini.client.service.RoomServiceTest"/>
+        <run-client-test classname="com.discordmini.client.network.ClientConnectionTest"/>
+        <run-client-test classname="com.discordmini.client.network.ConnectionManagerTest"/>
+        <run-client-test classname="com.discordmini.client.network.ReconnectManagerTest"/>
+        <run-client-test classname="com.discordmini.client.network.ServerListenerTest"/>
+        <run-client-test classname="com.discordmini.client.ui.AuthUiValidationTest"/>
+        <run-client-test classname="com.discordmini.client.ui.MainChatUiTest"/>
+        <run-client-test classname="com.discordmini.client.ui.NetworkStatusMonitorTest"/>
+    </target>
+</project>

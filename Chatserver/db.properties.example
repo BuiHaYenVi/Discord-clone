@@ -1,0 +1,61 @@
+# ============================================================
+# DISCORD MINI / WEB CLONE - SERVER & DATABASE CONFIGURATION TEMPLATE
+# Sao chep file nay thanh db.properties hoac src/config/db.properties
+# LUU Y: Bien moi truong (Environment Variables) luon duoc uu tien cao hon!
+# ============================================================
+
+# ------------------------------------------------------------
+# 1. Database Configuration (Local PostgreSQL hoac Neon Serverless)
+# Environment Overrides:
+#   NEON_JDBC_URL  (uu tien #1) hoac DB_URL
+#   NEON_DB_USER   (uu tien #1) hoac DB_USER
+#   NEON_DB_PASSWORD (uu tien #1) hoac DB_PASSWORD
+#   DB_POOL_MAX_SIZE
+# ------------------------------------------------------------
+db.url=jdbc:postgresql://localhost:5432/discord_mini
+# Vi du Neon Pooler:
+# db.url=jdbc:postgresql://<ep-xxx-pooler>.neon.tech/<db>?sslmode=require
+db.user=postgres
+db.password=YOUR_DATABASE_PASSWORD_HERE
+db.driver=org.postgresql.Driver
+db.pool.max_connections=6
+
+# ------------------------------------------------------------
+# 2. JWT Authentication Configuration
+# Environment Overrides:
+#   JWT_SECRET (bat buoc >= 32 ky tu ngau nhien tren Production)
+#   JWT_TTL_MINUTES
+# ------------------------------------------------------------
+jwt.secret=change-me-to-at-least-32-random-chars-secret-key
+jwt.ttl.minutes=60
+
+# ------------------------------------------------------------
+# 3. Network Ports & Single-Port Cloud Mode
+# Environment Overrides:
+#   TCP_PORT         (default: 5000)
+#   UDP_PORT         (default: 5001)
+#   HTTP_PORT        (default: 8080)
+#   WS_PORT          (default: 8081)
+#   PORT             (optional Single-Port override tren Render/Cloud)
+#   SINGLE_PORT_MODE (true/false - gop HTTP + WS chung 1 port khi deploy cloud)
+# ------------------------------------------------------------
+server.tcp.port=5000
+server.udp.port=5001
+server.http.port=8080
+server.ws.port=8081
+server.single.port=
+server.single.port.mode=false
+
+# ------------------------------------------------------------
+# 4. Gateway Guardrails & WebRTC ICE
+# Environment Overrides:
+#   CORS_ORIGIN, MAX_UPLOAD_MB, MESSAGE_MAX_CHARS
+#   STUN_URL, TURN_URL, TURN_USER, TURN_PASSWORD
+# ------------------------------------------------------------
+cors.origin=http://localhost:5173
+upload.max.mb=5
+message.max.chars=4000
+webrtc.stun.url=stun:stun.l.google.com:19302
+webrtc.turn.url=
+webrtc.turn.user=
+webrtc.turn.password=

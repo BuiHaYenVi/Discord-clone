@@ -1,0 +1,140 @@
+:root {
+  /* Typography - Zoho Cliq Quicksand + JetBrains Mono */
+  --font-display: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', monospace;
+
+  /* Spatial Layout Geometry (Preserved Floating Multi-Card Workspace) */
+  --rail-width: 60px;
+  --channel-sidebar-width: 330px;
+  --channel-sidebar-width-xl: 350px;
+  --member-sidebar-width: 280px;
+  --floating-gap: 16px;
+  --floating-max-width: 1560px;
+  --search-pill-height: 48px;
+  --stage-header-height: 60px;
+  --composer-min-height: 54px;
+
+  /* Border Radius - Cliq Friendly Rounded Scale */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 20px;
+  --radius-card: 24px;
+  --radius-pill: 9999px;
+
+  /* Transitions */
+  --ease-snappy: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 140ms;
+  --duration-normal: 220ms;
+}
+
+/* ==========================================================================
+   LIGHT THEME (Default) — Cliq Slate Daylight & Royal Blue
+   ========================================================================== */
+:root,
+[data-theme='light'] {
+  --bg-0: #f8fafc;
+  --bg-1: #ffffff;
+  --bg-2: #f8fafc;
+  --bg-3: #f1f5f9;
+  --bg-elevated: #ffffff;
+  --bg-hover: #f1f5f9;
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-inverse: #ffffff;
+
+  --accent-primary: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-active: #1e40af;
+  --accent-soft: #eff6ff;
+  --accent-tint: #bfdbfe;
+  --accent-secondary: #0284c7;
+  --accent-glow: rgba(37, 99, 235, 0.14);
+
+  /* Incoming / Outgoing Message Bubbles */
+  --bubble-in-bg: #f1f5f9;
+  --bubble-in-text: #0f172a;
+  --bubble-in-border: #e2e8f0;
+  --bubble-out-bg: #dbeafe;
+  --bubble-out-text: #0f172a;
+  --bubble-out-border: #bfdbfe;
+
+  --status-online: #22c55e;
+  --status-idle: #f59e0b;
+  --status-dnd: #ef4444;
+  --status-offline: #94a3b8;
+
+  --transport-ws: #2563eb;
+  --transport-tcp: #0284c7;
+  --transport-udp: #0d9488;
+
+  --border-subtle: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --border-focus: #2563eb;
+
+  --shadow-sm: 0 2px 8px -2px rgba(15, 23, 42, 0.05), 0 1px 3px -1px rgba(15, 23, 42, 0.03);
+  --shadow-md: 0 8px 24px -4px rgba(15, 23, 42, 0.07), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 16px 36px -6px rgba(15, 23, 42, 0.10), 0 4px 12px -2px rgba(15, 23, 42, 0.05);
+  --shadow-card: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 2px 8px -2px rgba(15, 23, 42, 0.03);
+
+  --glass-bg: rgba(255, 255, 255, 0.94);
+  --glass-border: #e2e8f0;
+}
+
+/* ==========================================================================
+   DARK THEME — Cliq Deep Slate Night
+   ========================================================================== */
+[data-theme='dark'] {
+  --bg-0: #090d16;
+  --bg-1: #0f172a;
+  --bg-2: #1e293b;
+  --bg-3: #1e293b;
+  --bg-elevated: #1e293b;
+  --bg-hover: #334155;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-inverse: #ffffff;
+
+  --accent-primary: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-active: #1d4ed8;
+  --accent-soft: rgba(37, 99, 235, 0.18);
+  --accent-tint: rgba(59, 130, 246, 0.32);
+  --accent-secondary: #38bdf8;
+  --accent-glow: rgba(59, 130, 246, 0.22);
+
+  /* Incoming / Outgoing Message Bubbles */
+  --bubble-in-bg: #1e293b;
+  --bubble-in-text: #f1f5f9;
+  --bubble-in-border: #334155;
+  --bubble-out-bg: #1d4ed8;
+  --bubble-out-text: #ffffff;
+  --bubble-out-border: #2563eb;
+
+  --status-online: #22c55e;
+  --status-idle: #f59e0b;
+  --status-dnd: #ef4444;
+  --status-offline: #64748b;
+
+  --transport-ws: #60a5fa;
+  --transport-tcp: #38bdf8;
+  --transport-udp: #2dd4bf;
+
+  --border-subtle: #1e293b;
+  --border-strong: #334155;
+  --border-focus: #3b82f6;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.32);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.44);
+  --shadow-lg: 0 18px 42px rgba(0, 0, 0, 0.58);
+  --shadow-card: 0 12px 32px -4px rgba(0, 0, 0, 0.45);
+
+  --glass-bg: rgba(15, 23, 42, 0.92);
+  --glass-border: rgba(51, 65, 85, 0.65);
+}
